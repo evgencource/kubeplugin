@@ -1,6 +1,19 @@
 #!/bin/bash
 
+# Usage: script_name <resource-type> <namespace>
+# This script retrieves resource usage statistics from Kubernetes for the specified resource type and namespace.
+# Example: ./kubeplugin pods default
+
 # Define command-line arguments
+
+# Check if the necessary arguments are provided
+if [ -z "$RESOURCE_TYPE" ] || [ -z "$NAMESPACE" ]; then
+  echo "Usage: $0 <resource-type> <namespace>"
+  echo "This script retrieves resource usage statistics from Kubernetes for the specified resource type and namespace."
+  echo "Example:  bash $0 pods default"
+  exit 1
+fi
+
 
 RESOURCE_TYPE=$1
 NAMESPACE=$2
