@@ -3,8 +3,20 @@
 # Usage: script_name <resource-type> <namespace>
 # This script retrieves resource usage statistics from Kubernetes for the specified resource type and namespace.
 # Example: ./kubeplugin pods default
+# ./kubeplugin pod default
+# Resource: pod, Namespace: default, Name: nginx-deployment-7c79c4bf97-9b9pq, CPU: 0m, Memory: 2Mi
+# Resource: pod, Namespace: default, Name: nginx-deployment-7c79c4bf97-sf6wl, CPU: 0m, Memory: 2Mi
+
+
+
+
+
 
 # Define command-line arguments
+
+
+RESOURCE_TYPE=$1
+NAMESPACE=$2
 
 # Check if the necessary arguments are provided
 if [ -z "$RESOURCE_TYPE" ] || [ -z "$NAMESPACE" ]; then
@@ -13,10 +25,6 @@ if [ -z "$RESOURCE_TYPE" ] || [ -z "$NAMESPACE" ]; then
   echo "Example:  bash $0 pods default"
   exit 1
 fi
-
-
-RESOURCE_TYPE=$1
-NAMESPACE=$2
 
 # Retrieve resource usage statistics from Kubernetes
 kubectl top $RESOURCE_TYPE -n $NAMESPACE | tail -n +2 | while read line
